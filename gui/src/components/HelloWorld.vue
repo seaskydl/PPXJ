@@ -39,7 +39,7 @@ const creator = ref('pangao')
 const appName = ref("")
 const appVersion = ref("")
 
-// TODO Code that should be running after pywebview is ready to operate
+// NOTE: Code that should be running after pywebview is ready to operate
 window.addEventListener('pywebviewready', function () {
   window.pywebview.api.system_appName().then((res)=> {
     appName.value = res
