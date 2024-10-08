@@ -36,6 +36,12 @@ class System():
       'appVersion': Config.appVersion  # 应用版本号
     }
 
+  def system_appName(self):
+    return Config.appName
+
+  def system_appVersion(self):
+    return Config.appVersion
+
   def system_checkNewVersion(self):
     '''检查更新'''
     appUpdate = AppUpdate()    # 程序更新类
@@ -69,22 +75,22 @@ class System():
       os.startfile(path)
 
   def system_pyCreateFileDialog(self, fileTypes=['全部文件 (*.*)'], directory=''):
-      '''打开文件对话框'''
-      # 可选文件类型
-      # fileTypes = ['Excel表格 (*.xlsx;*.xls)']
-      fileTypes = tuple(fileTypes)    # 要求必须是元组
-      result = System._window.create_file_dialog(dialog_type=webview.OPEN_DIALOG, directory=directory, allow_multiple=True, file_types=fileTypes)
-      resList = list()
-      if result is not None:
-        for res in result:
-          filePathList = os.path.split(res)
-          dir = filePathList[0]
-          filename = filePathList[1]
-          ext = os.path.splitext(res)[-1]
-          resList.append({
-              'filename': filename,
-              'ext': ext,
-              'dir': dir,
-              'path': res
-            })
-      return resList
+    '''打开文件对话框'''
+    # 可选文件类型
+    # fileTypes = ['Excel表格 (*.xlsx;*.xls)']
+    fileTypes = tuple(fileTypes)    # 要求必须是元组
+    result = System._window.create_file_dialog(dialog_type=webview.OPEN_DIALOG, directory=directory, allow_multiple=True, file_types=fileTypes)
+    resList = list()
+    if result is not None:
+      for res in result:
+        filePathList = os.path.split(res)
+        dir = filePathList[0]
+        filename = filePathList[1]
+        ext = os.path.splitext(res)[-1]
+        resList.append({
+            'filename': filename,
+            'ext': ext,
+            'dir': dir,
+            'path': res
+          })
+    return resList

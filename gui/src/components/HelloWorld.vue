@@ -1,6 +1,7 @@
 <template>
   <div class="center-col">
-    <h1>{{ msg }}</h1>
+    <h1>{{ appName }} {{ appVersion }}</h1>
+    <h2>{{ msg }}</h2>
 
     <p>
       基于
@@ -34,7 +35,21 @@ defineProps({
   msg: String
 })
 
-let creator = ref('pangao')
+const creator = ref('pangao')
+const appName = ref("")
+const appVersion = ref("")
+
+// TODO Code that should be running after pywebview is ready to operate
+window.addEventListener('pywebviewready', function () {
+  window.pywebview.api.system_appName().then((res)=> {
+    appName.value = res
+  })
+
+  window.pywebview.api.system_appVersion().then((res)=> {
+    appVersion.value = res
+  })
+})
+
 
 const getOwner = () => {
   // 获取本机用户名
